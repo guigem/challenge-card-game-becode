@@ -60,7 +60,8 @@ class Board:
         #create points record
         points = []
         for k in range(num_players):
-            points.append(0)        
+            points.insert(k,0)        
+        
         
         #Game begins and round starts
         while dicti[0]["cards"]:
@@ -82,23 +83,48 @@ class Board:
             #update history with all cards from a turn
             self.history_cards[self.turn_count] = {"card_played" : self.active_cards}
             
-
+            #count points
+            f_letter = []
+            for l in self.active_cards:
+                f_letter.append(l[0])
+            
+            if "A" in f_letter:
+                points[f_letter.index("A")] += 15
                 
+            elif "K" in f_letter:
+                points[f_letter.index("K")] += 13
+            
+            elif "Q" in f_letter and "K" not in f_letter:
+                points[f_letter.index("Q")] += 12
+            
+            elif "J" in f_letter and "K" not in f_letter and "Q" not in f_letter:
+                points[f_letter.index("J")] += 11
+            else:
+                for y in range(len(f_letter)):
+                    f_letter[y] = int(f_letter[y])
+                ind = f_letter.index(max(f_letter))
+                points[ind] += max(f_letter)
+            
+            
                 
             
             #messages to let people know the progress of the game
             print("This is the end of turn {}".format(self.turn_count)) 
             print("The cards played this turn are {}".format(self.active_cards))
+            print("Here is the list of the scores: {} ".format(points))
             print("List of cards already played in the game : {}".format(self.history_cards))
             
             #reset a new active list
             self.active_cards = []
-        
-        #Last message when the game is done
-        return "Game is over"   
             
+            #winner must reach 50 points
+            for m in range(len(points)):
+                if points[m] >= 50:
+                    return print("{} has won the game!".format(dicti[m]["name"]))
+                    
+                    
+        #Last message when the game is done
+          
 
 
-t = ["K", "9", "8"]
-if "K" in t:
-    t.index("K")
+            
