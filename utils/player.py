@@ -65,6 +65,28 @@ for i in range(len(value)):
         h += 1
 print(dic[2]["value"])
 
+ty = []
+
+for i in value:
+    for j in icon:
+        cd= i + j 
+        ty.append(cd)
+
+print(ty)
+hands = [self.deck[i::n_players] for i in range(0, n_players)]
+n_players = 6
+tet = []
+for i in range(n_players):
+    inter = []
+    for u in range(6):
+        inter.append(ty[u])
+    tet.append(inter)
+    for o in inter:
+        ty.remove(o)
+
+    
+print(tet)
+    
 print(len(dic))
 ran = random.randint(0, len(dic))
 print(ran)
@@ -72,5 +94,14 @@ import random
 
 random.shuffle(dic)
 print(dic)
+
+
+
+
+
+
+
+
+
 
 
