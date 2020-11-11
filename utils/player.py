@@ -22,6 +22,10 @@ class Player:
         self.turns = num_turns
         self.history = []
 
+    def __str__(self):
+        
+        return f" list of names : {self.names}, list of cards : {self.cards}, turns : {self.turns}"
+        
         
     def play(self):
         

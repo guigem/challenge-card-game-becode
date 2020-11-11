@@ -7,6 +7,10 @@ class Symbol:
         #initialize the colors and the icons
         self.color = ["black", "red"]
         self.icon = ["♥","♦","♣","♠"]
+    
+    def __str__(self):
+        
+        return f"Colors : {self.color}, icons : {self.icon} "
         
 class Card(Symbol):
     
@@ -15,6 +19,9 @@ class Card(Symbol):
         super().__init__()
         self.value = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
         
+    def __str__(self):
+        
+        return f" Values : {self.value}"
         
     def fill_deck(self):
         

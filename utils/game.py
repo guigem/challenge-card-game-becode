@@ -31,7 +31,10 @@ class Board:
         self.history_cards = {}
         
         
+    def __str__(self):
         
+        return f" Players : {self.players}, turns : {self.turn_count}, active_cards : {self.active_cards}"
+    
     def start_game(self,num_players):
         
           
@@ -83,22 +86,32 @@ class Board:
             #update history with all cards from a turn
             self.history_cards[self.turn_count] = {"card_played" : self.active_cards}
             
-            #count points
+            '''
+            Counting points:
+            We select the first part of each card that represents its value
+            '''
+            
             f_letter = []
             for l in self.active_cards:
                 f_letter.append(l[0])
             
+            #If there is an as, you win 15 points
             if "A" in f_letter:
                 points[f_letter.index("A")] += 15
                 
-            elif "K" in f_letter:
+            #If the highest card is an king, you win 13 points   
+            elif "K" in f_letter and "A" not in f_letter:
                 points[f_letter.index("K")] += 13
             
-            elif "Q" in f_letter and "K" not in f_letter:
+            #If the highest card is an queen, you win 12 points
+            elif "Q" in f_letter and "K" not in f_letter and "A" not in f_letter:
                 points[f_letter.index("Q")] += 12
             
-            elif "J" in f_letter and "K" not in f_letter and "Q" not in f_letter:
+            #If the highest card is an joker, you win 11 points
+            elif "J" in f_letter and "K" not in f_letter and "Q" not in f_letter and "A" not in f_letter:
                 points[f_letter.index("J")] += 11
+                
+            #If the max value is between 2 and 10:
             else:
                 for y in range(len(f_letter)):
                     f_letter[y] = int(f_letter[y])
@@ -123,7 +136,7 @@ class Board:
                     return print("{} has won the game!".format(dicti[m]["name"]))
                     
                     
-        #Last message when the game is done
+        
           
 
 
